@@ -1,8 +1,11 @@
-# React + Vite
+# Image Gallery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About
+- This is a React project and there are list of images are shown in this site in a grid format.
+- Images can be drag and drop to another place which will swap the position of the images in the UI.
+- By dragging and placing any image can be made the featured image.
+- Multiple images can be selected at a time and multiple images can be deleted by pressing the delete button after the selection.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Development
+- The project can be run after downloading or cloning from github using 'yarn dev' command.
+- Dummy database like file was created db.json which has images path.

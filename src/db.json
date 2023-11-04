@@ -52,6 +52,6 @@
     {
         "id": 11,
         "img": "src/assets/images/image-11.jpeg",
-        "showImage": false
+        "showImage": true
     }
 ]

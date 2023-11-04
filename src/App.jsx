@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 
 function App() {
   const [pictures, setPictures] = useState(images);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState([]);
 
   const dragPicture = useRef(0);
   const draggedOverPicture = useRef(0);
@@ -12,29 +12,24 @@ function App() {
   const handleSort = () => {
     const picturesClone = [...pictures];
     const temp = picturesClone[dragPicture.current];
-    picturesClone[dragPicture.current] = picturesClone[draggedOverPicture.current];
+    picturesClone[dragPicture.current] =
+    picturesClone[draggedOverPicture.current];
     picturesClone[draggedOverPicture.current] = temp;
     setPictures(picturesClone);
-  }
+  };
 
-  // const handleDelete = () => {
-  //   if (checked) {
-  //     const newPictures = [...pictures];
-  //     const changedPictures = newPictures.map((picture) => picture.showImage = false);
-  //     setPictures(changedPictures);
-  //   }
-  // }
+  let newArr = [];
+  const handleCheck = (id) => {
+    const delPics = pictures.find((picture) => picture.id === id);
+    newArr.push(delPics);
+    newArr = [...checked, ...newArr];
+    setChecked(newArr);
+  };
 
   const handleDelete = () => {
-      const newPictures = pictures.map((picture) => {
-        if (checked) {
-          return { ...picture, showImage: false };
-        } else {
-          return picture;
-        }
-      });
-      setPictures(newPictures);
-    }
+    checked.map((pic) => (pic.showImage = false));
+    setPictures([...pictures, ...checked]);
+  };
 
   const renderedImage = pictures.map((picture, index) => {
     if (picture.showImage) {
@@ -54,7 +49,7 @@ function App() {
             <input
               type="checkbox"
               className="checked:bg-blue-500 absolute left-3 top-3 h-4 w-4"
-              onClick={() => setChecked(!checked)}
+              onClick={() => handleCheck(picture.id)}
             />
           </div>
         </div>
@@ -64,9 +59,17 @@ function App() {
 
   return (
     <>
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-xl font-bold">Image Gallery</h2>
+        <button
+          className="hover:bg-red-500 text-white bg-red-600 border-0"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2">
         {renderedImage}
-        <button onClick={handleDelete}>Delete</button>
       </div>
     </>
   );
